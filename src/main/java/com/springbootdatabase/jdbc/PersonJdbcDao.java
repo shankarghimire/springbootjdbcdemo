@@ -20,5 +20,18 @@ public class PersonJdbcDao {
 		return jdbcTemplate.query("Select * from Person", 
 				new BeanPropertyRowMapper<Person>(Person.class));
 	}
+	
+	//Select a Person by Id
+		@SuppressWarnings("deprecation")
+		public Person findById(int id){
+			return jdbcTemplate.queryForObject("Select * from Person where id=?",
+					new Object[] {id},
+					new BeanPropertyRowMapper<Person>(Person.class));
+		}
+	//Delete by Id
+	public int deleteById(int id){
+		return jdbcTemplate.update("Delete  from Person where id=?",
+				new Object[] {id});
+	}
 
 }
